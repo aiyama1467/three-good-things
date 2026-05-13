@@ -18,7 +18,8 @@ export default function Heatmap({ data, weeks = 26 }: HeatmapProps) {
         const strong = v > 0.7;
         return (
           <div
-            key={i}
+            // biome-ignore lint/suspicious/noArrayIndexKey: heatmap cells are purely positional
+            key={`cell-${i}`}
             style={{
               aspectRatio: "1/1",
               background: filled

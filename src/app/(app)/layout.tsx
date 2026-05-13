@@ -1,10 +1,10 @@
+import { AppSidebar } from "@/components/AppSidebar";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
-import { Separator } from "@/components/ui/separator";
 import { STREAK } from "@/lib/mock-data";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

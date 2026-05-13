@@ -1,14 +1,14 @@
+import { CalendarDays, Flame } from "lucide-react";
 import Link from "next/link";
-import { Flame, CalendarDays } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   generateHeatmap,
   STREAK,
-  TOTAL_GOOD_THINGS,
   TOP_WORDS,
+  TOTAL_GOOD_THINGS,
 } from "@/lib/mock-data";
+import { cn } from "@/lib/utils";
 
 const heatmapData = generateHeatmap(36);
 const WEEKS = 36;
@@ -39,7 +39,8 @@ export default function ReviewPage() {
               const strong = v > 0.7;
               return (
                 <div
-                  key={i}
+                  // biome-ignore lint/suspicious/noArrayIndexKey: heatmap cells are purely positional
+                  key={`cell-${i}`}
                   className="aspect-square rounded-[2px]"
                   style={{
                     background: filled

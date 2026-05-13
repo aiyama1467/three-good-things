@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { FILLED_DATES, ENTRIES, getMoodEmoji } from "@/lib/mock-data";
+import { ENTRIES, FILLED_DATES, getMoodEmoji } from "@/lib/mock-data";
 
 const DAYS_OF_WEEK = ["日", "月", "火", "水", "木", "金", "土"];
 
@@ -32,10 +32,10 @@ export default function CalendarPage() {
 
   const cells = buildCalendar(year, month);
   const filledCount = cells.filter(
-    (d) => d !== null && FILLED_DATES.has(isoDate(year, month, d!)),
+    (d) => d !== null && FILLED_DATES.has(isoDate(year, month, d as number)),
   ).length;
   const totalDays = cells.filter(
-    (d) => d !== null && isoDate(year, month, d!) <= TODAY,
+    (d) => d !== null && isoDate(year, month, d as number) <= TODAY,
   ).length;
 
   const previewEntry = ENTRIES[PREVIEW_DATE];
@@ -93,7 +93,8 @@ export default function CalendarPage() {
           {/* Day cells */}
           <div className="grid grid-cols-7 gap-1">
             {cells.map((d, i) => {
-              if (d === null) return <div key={i} />;
+              // biome-ignore lint/suspicious/noArrayIndexKey: null cells are positional placeholders with no stable id
+              if (d === null) return <div key={`empty-${i}`} />;
               const iso = isoDate(year, month, d);
               const filled = FILLED_DATES.has(iso);
               const isToday = iso === TODAY;
@@ -101,7 +102,7 @@ export default function CalendarPage() {
 
               return (
                 <Link
-                  key={i}
+                  key={iso}
                   href={filled ? `/entry/${iso}` : "#"}
                   className={`
                     aspect-square flex flex-col items-center justify-center rounded-md text-xs font-medium transition-colors
@@ -166,7 +167,7 @@ export default function CalendarPage() {
             </div>
             <ol className="text-xs text-muted-foreground space-y-0.5 list-decimal list-inside">
               {previewEntry.items.map(
-                (item, i) => item && <li key={i}>{item}</li>,
+                (item) => item && <li key={item}>{item}</li>,
               )}
             </ol>
           </CardContent>

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { ChevronLeft, Pencil, Share2 } from "lucide-react";
+import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ENTRIES, formatDate, getMoodEmoji, MOODS } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
-import { ENTRIES, getMoodEmoji, MOODS, formatDate } from "@/lib/mock-data";
 
 interface Props {
   params: Promise<{ date: string }>;
@@ -58,7 +58,7 @@ export default async function EntryDetailPage({ params }: Props) {
       <div className="space-y-2">
         {entry.items.map((item, i) =>
           item ? (
-            <Card key={i}>
+            <Card key={item}>
               <CardContent className="py-3 px-4 flex gap-3 items-start">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold mt-0.5">
                   {i + 1}

@@ -1,5 +1,5 @@
+import { ENTRIES, MEMORY_ITEM, STREAK } from "@/lib/mock-data";
 import { TodayClient } from "./TodayClient";
-import { ENTRIES, STREAK, MEMORY_ITEM } from "@/lib/mock-data";
 
 const TODAY = "2026-05-13";
 

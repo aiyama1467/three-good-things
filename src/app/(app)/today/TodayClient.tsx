@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Flame } from "lucide-react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { type Mood, MOODS } from "@/lib/mock-data";
+import { MOODS, type Mood } from "@/lib/mock-data";
 
 interface Props {
   dateLabel: string;
@@ -82,6 +82,7 @@ export function TodayClient({
           <div className="flex gap-2">
             {MOODS.map((m) => (
               <button
+                type="button"
                 key={m.value}
                 onClick={() => setMood(m.value)}
                 title={m.label}

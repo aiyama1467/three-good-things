@@ -28,6 +28,7 @@ export default function MoodPicker({
       <div style={{ display: "flex", gap: 8, fontSize: 20 }}>
         {MOODS.map((m) => (
           <button
+            type="button"
             key={m.value}
             onClick={() => setSelected(m.value)}
             title={m.label}

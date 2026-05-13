@@ -140,7 +140,7 @@ export const MEMORY_ITEM = {
 };
 
 export function formatDate(isoDate: string): string {
-  const d = new Date(isoDate + "T00:00:00");
+  const d = new Date(`${isoDate}T00:00:00`);
   const month = d.getMonth() + 1;
   const day = d.getDate();
   const days = ["日", "月", "火", "水", "木", "金", "土"];
