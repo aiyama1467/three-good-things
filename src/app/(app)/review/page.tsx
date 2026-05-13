@@ -45,9 +45,9 @@ export default function ReviewPage() {
                   style={{
                     background: filled
                       ? strong
-                        ? "oklch(0.577 0.245 27.325)"
-                        : "oklch(0.646 0.222 41.116)"
-                      : "oklch(0.922 0 0)",
+                        ? "var(--heatmap-strong)"
+                        : "var(--heatmap-weak)"
+                      : "var(--heatmap-empty)",
                   }}
                 />
               );
@@ -59,11 +59,11 @@ export default function ReviewPage() {
               <span className="inline-block w-2.5 h-2.5 rounded-[2px] bg-border" />
               <span
                 className="inline-block w-2.5 h-2.5 rounded-[2px]"
-                style={{ background: "oklch(0.646 0.222 41.116)" }}
+                style={{ background: "var(--heatmap-weak)" }}
               />
               <span
                 className="inline-block w-2.5 h-2.5 rounded-[2px]"
-                style={{ background: "oklch(0.577 0.245 27.325)" }}
+                style={{ background: "var(--heatmap-strong)" }}
               />
             </div>
             <span>多い</span>

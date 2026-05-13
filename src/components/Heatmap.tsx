@@ -24,9 +24,9 @@ export default function Heatmap({ data, weeks = 26 }: HeatmapProps) {
               aspectRatio: "1/1",
               background: filled
                 ? strong
-                  ? "var(--accent-2)"
-                  : "var(--accent)"
-                : "#e9e3d0",
+                  ? "var(--heatmap-strong)"
+                  : "var(--heatmap-weak)"
+                : "var(--heatmap-empty)",
               borderRadius: 2,
             }}
           />
