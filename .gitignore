@@ -17,6 +17,8 @@
 /.next/
 /out/
 
+settings.local.json
+
 # production
 /build
 
