@@ -1,136 +1,105 @@
-import Heatmap from "@/components/Heatmap";
-import SketchButton from "@/components/SketchButton";
-import { generateHeatmap, STREAK, TOTAL_GOOD_THINGS, TOP_WORDS } from "@/lib/mock-data";
 import Link from "next/link";
+import { Flame, CalendarDays } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { generateHeatmap, STREAK, TOTAL_GOOD_THINGS, TOP_WORDS } from "@/lib/mock-data";
 
 const heatmapData = generateHeatmap(36);
+const WEEKS = 36;
 
 export default function ReviewPage() {
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: "20px 16px" }}>
-      <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 28, fontWeight: 700 }}>
-        ふりかえり
-      </div>
-
-      {/* Segment control */}
-      <div style={{ display: "flex", gap: 4, marginTop: 8 }}>
-        {["年", "月", "週"].map((t, i) => (
-          <div
-            key={t}
-            style={{
-              flex: 1,
-              textAlign: "center",
-              fontSize: 13,
-              padding: "4px 0",
-              border: "1.5px solid var(--ink)",
-              borderRadius: 99,
-              background: i === 0 ? "var(--accent)" : "var(--paper)",
-              cursor: "pointer",
-            }}
-          >
-            {t}
-          </div>
-        ))}
-      </div>
+    <div className="max-w-xl space-y-4">
+      <h1 className="text-2xl font-bold">ふりかえり</h1>
 
       {/* Heatmap */}
-      <div
-        style={{
-          border: "2px solid var(--ink)",
-          borderRadius: 14,
-          padding: "12px 14px",
-          background: "var(--paper)",
-          marginTop: 10,
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-          <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 20, fontWeight: 700 }}>2026</div>
-          <div style={{ fontSize: 12, color: "var(--ink-3)" }}>112 / 133日</div>
-        </div>
-        <Heatmap data={heatmapData} weeks={36} />
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--ink-3)", marginTop: 6 }}>
-          <span>少ない</span>
-          <span style={{ display: "flex", gap: 3, alignItems: "center" }}>
-            <span style={{ width: 8, height: 8, display: "inline-block", background: "#e9e3d0", borderRadius: 2 }} />
-            <span style={{ width: 8, height: 8, display: "inline-block", background: "var(--accent)", borderRadius: 2 }} />
-            <span style={{ width: 8, height: 8, display: "inline-block", background: "var(--accent-2)", borderRadius: 2 }} />
-          </span>
-          <span>多い</span>
-        </div>
-      </div>
+      <Card>
+        <CardHeader className="pb-2">
+          <div className="flex items-baseline justify-between">
+            <CardTitle className="text-base">2026 年間ヒートマップ</CardTitle>
+            <span className="text-xs text-muted-foreground">112 / 133日</span>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div
+            style={{ display: "grid", gridTemplateColumns: `repeat(${WEEKS}, 1fr)`, gap: 2 }}
+          >
+            {heatmapData.map((filled, i) => {
+              const v = (Math.sin(i * 1.3) + 1) / 2;
+              const strong = v > 0.7;
+              return (
+                <div
+                  key={i}
+                  className="aspect-square rounded-[2px]"
+                  style={{
+                    background: filled
+                      ? strong
+                        ? "oklch(0.577 0.245 27.325)"
+                        : "oklch(0.646 0.222 41.116)"
+                      : "oklch(0.922 0 0)",
+                  }}
+                />
+              );
+            })}
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground mt-2">
+            <span>少ない</span>
+            <div className="flex items-center gap-1">
+              <span className="inline-block w-2.5 h-2.5 rounded-[2px] bg-border" />
+              <span className="inline-block w-2.5 h-2.5 rounded-[2px]" style={{ background: "oklch(0.646 0.222 41.116)" }} />
+              <span className="inline-block w-2.5 h-2.5 rounded-[2px]" style={{ background: "oklch(0.577 0.245 27.325)" }} />
+            </div>
+            <span>多い</span>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 10 }}>
-        <div
-          style={{
-            border: "2px solid var(--ink)",
-            borderRadius: 14,
-            padding: "12px",
-            background: "var(--paper)",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 32, fontWeight: 700, color: "var(--accent-2)" }}>
-            🔥 {STREAK}
-          </div>
-          <div style={{ fontSize: 12, color: "var(--ink-3)" }}>連続日数</div>
-        </div>
-        <div
-          style={{
-            border: "2px solid var(--ink)",
-            borderRadius: 14,
-            padding: "12px",
-            background: "var(--paper)",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 32, fontWeight: 700 }}>
-            {TOTAL_GOOD_THINGS}
-          </div>
-          <div style={{ fontSize: 12, color: "var(--ink-3)" }}>いいこと累計</div>
-        </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Card>
+          <CardContent className="py-4 text-center">
+            <div className="flex items-center justify-center gap-1.5 text-2xl font-bold">
+              <Flame className="h-6 w-6 text-orange-500" />
+              {STREAK}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">連続日数</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-4 text-center">
+            <p className="text-2xl font-bold">{TOTAL_GOOD_THINGS}</p>
+            <p className="text-xs text-muted-foreground mt-1">いいこと累計</p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Word cloud */}
-      <div
-        style={{
-          border: "2px dashed var(--ink)",
-          borderRadius: 14,
-          padding: "12px 14px",
-          background: "transparent",
-          marginTop: 10,
-        }}
-      >
-        <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 18, fontWeight: 700 }}>
-          よく書いた言葉
-        </div>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
-          {TOP_WORDS.map(([word, count], i) => {
-            const size = 22 - i * 2;
-            return (
+      <Card className="border-dashed">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">よく書いた言葉</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-3 items-baseline">
+            {TOP_WORDS.map(([word, count], i) => (
               <span
                 key={word}
-                style={{
-                  fontFamily: "var(--font-caveat), cursive",
-                  fontWeight: 700,
-                  fontSize: size,
-                  lineHeight: 1.3,
-                }}
+                className="font-semibold"
+                style={{ fontSize: `${22 - i * 2}px` }}
               >
-                {word}{" "}
-                <span style={{ color: "var(--ink-3)", fontSize: 11, fontWeight: 400 }}>·{count}</span>
+                {word}
+                <span className="text-xs font-normal text-muted-foreground ml-1">·{count}</span>
               </span>
-            );
-          })}
-        </div>
-      </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Calendar link */}
-      <div style={{ marginTop: 12 }}>
-        <Link href="/calendar" style={{ textDecoration: "none" }}>
-          <SketchButton>📅 月カレンダーを開く</SketchButton>
-        </Link>
-      </div>
+      <Link href="/calendar" className={cn(buttonVariants({ variant: "outline" }))}>
+        <CalendarDays className="h-4 w-4" />
+        月カレンダーを開く
+      </Link>
     </div>
   );
 }

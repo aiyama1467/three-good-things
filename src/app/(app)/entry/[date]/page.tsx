@@ -1,5 +1,8 @@
 import Link from "next/link";
-import SketchButton from "@/components/SketchButton";
+import { ChevronLeft, Pencil, Share2 } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { ENTRIES, getMoodEmoji, MOODS, formatDate } from "@/lib/mock-data";
 
 interface Props {
@@ -12,11 +15,12 @@ export default async function EntryDetailPage({ params }: Props) {
 
   if (!entry) {
     return (
-      <div style={{ maxWidth: 600, margin: "0 auto", padding: "20px 16px" }}>
-        <Link href="/calendar" style={{ fontSize: 13, color: "var(--ink-3)", textDecoration: "none" }}>
-          ‹ カレンダー
+      <div className="max-w-xl space-y-4">
+        <Link href="/calendar" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "-ml-2")}>
+          <ChevronLeft className="h-4 w-4" />
+          カレンダー
         </Link>
-        <div style={{ marginTop: 20, fontSize: 15 }}>この日の記録はありません。</div>
+        <p className="text-muted-foreground">この日の記録はありません。</p>
       </div>
     );
   }
@@ -24,67 +28,46 @@ export default async function EntryDetailPage({ params }: Props) {
   const moodLabel = MOODS.find((m) => m.value === entry.mood)?.label ?? "";
 
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto", padding: "20px 16px" }}>
-      {/* Back */}
-      <Link href="/calendar" style={{ fontSize: 13, color: "var(--ink-3)", textDecoration: "none" }}>
-        ‹ カレンダーに戻る
+    <div className="max-w-xl space-y-4">
+      <Link href="/calendar" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "-ml-2")}>
+        <ChevronLeft className="h-4 w-4" />
+        カレンダー
       </Link>
 
-      {/* Date & mood */}
-      <div style={{ marginTop: 12 }}>
-        <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 28, fontWeight: 700 }}>
-          {formatDate(date)}
-        </div>
-        <div style={{ fontSize: 13, color: "var(--ink-3)", marginTop: 2 }}>
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold">{formatDate(date)}</h1>
+        <p className="text-sm text-muted-foreground mt-0.5">
           {getMoodEmoji(entry.mood)} {moodLabel}な日
-        </div>
+        </p>
       </div>
 
       {/* Entries */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 14 }}>
-        {entry.items.map((item, i) => (
+      <div className="space-y-2">
+        {entry.items.map((item, i) =>
           item ? (
-            <div
-              key={i}
-              style={{
-                border: "2px solid var(--ink)",
-                borderRadius: 14,
-                padding: "10px 14px",
-                background: "var(--paper)",
-                display: "flex",
-                gap: 12,
-              }}
-            >
-              <div
-                style={{
-                  width: 28,
-                  height: 28,
-                  border: "2px solid var(--ink)",
-                  borderRadius: "50%",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "var(--font-caveat), cursive",
-                  fontWeight: 700,
-                  fontSize: 15,
-                  background: "var(--accent)",
-                  flexShrink: 0,
-                  marginTop: 2,
-                }}
-              >
-                {i + 1}
-              </div>
-              <div style={{ flex: 1, fontSize: 14, lineHeight: 1.5, paddingTop: 4 }}>{item}</div>
-            </div>
+            <Card key={i}>
+              <CardContent className="py-3 px-4 flex gap-3 items-start">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold mt-0.5">
+                  {i + 1}
+                </span>
+                <p className="text-sm leading-relaxed pt-0.5">{item}</p>
+              </CardContent>
+            </Card>
           ) : null
-        ))}
+        )}
       </div>
 
-
       {/* Actions */}
-      <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
-        <SketchButton style={{ flex: 1, justifyContent: "center" }}>編集</SketchButton>
-        <SketchButton style={{ flex: 1, justifyContent: "center" }}>↗ 共有</SketchButton>
+      <div className="flex gap-2 pt-2">
+        <Button variant="outline" size="sm">
+          <Pencil className="h-3.5 w-3.5 mr-1.5" />
+          編集
+        </Button>
+        <Button variant="outline" size="sm">
+          <Share2 className="h-3.5 w-3.5 mr-1.5" />
+          共有
+        </Button>
       </div>
     </div>
   );
