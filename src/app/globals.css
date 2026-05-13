@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+.mobile-nav { display: flex; }
+.desktop-nav { display: none; }
+
+@media (min-width: 768px) {
+  .mobile-nav { display: none; }
+  .desktop-nav { display: flex; }
+}
+
+:root {
+  --ink: #1a1a1a;
+  --ink-2: #444;
+  --ink-3: #888;
+  --paper: #fafaf6;
+  --paper-2: #f1ede2;
+  --accent: #e8b13b;
+  --accent-2: #c44545;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
