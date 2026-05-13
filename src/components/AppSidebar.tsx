@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Flame, LayoutDashboard, LineChart, Settings } from "lucide-react";
+import {
+  CalendarDays,
+  Flame,
+  LayoutDashboard,
+  LineChart,
+  Settings,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,

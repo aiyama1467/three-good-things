@@ -16,7 +16,13 @@ export default async function EntryDetailPage({ params }: Props) {
   if (!entry) {
     return (
       <div className="max-w-xl space-y-4">
-        <Link href="/calendar" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "-ml-2")}>
+        <Link
+          href="/calendar"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "-ml-2",
+          )}
+        >
           <ChevronLeft className="h-4 w-4" />
           カレンダー
         </Link>
@@ -29,7 +35,13 @@ export default async function EntryDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-xl space-y-4">
-      <Link href="/calendar" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "-ml-2")}>
+      <Link
+        href="/calendar"
+        className={cn(
+          buttonVariants({ variant: "ghost", size: "sm" }),
+          "-ml-2",
+        )}
+      >
         <ChevronLeft className="h-4 w-4" />
         カレンダー
       </Link>
@@ -54,7 +66,7 @@ export default async function EntryDetailPage({ params }: Props) {
                 <p className="text-sm leading-relaxed pt-0.5">{item}</p>
               </CardContent>
             </Card>
-          ) : null
+          ) : null,
         )}
       </div>
 

@@ -32,21 +32,25 @@ export default function CalendarPage() {
 
   const cells = buildCalendar(year, month);
   const filledCount = cells.filter(
-    (d) => d !== null && FILLED_DATES.has(isoDate(year, month, d!))
+    (d) => d !== null && FILLED_DATES.has(isoDate(year, month, d!)),
   ).length;
   const totalDays = cells.filter(
-    (d) => d !== null && isoDate(year, month, d!) <= TODAY
+    (d) => d !== null && isoDate(year, month, d!) <= TODAY,
   ).length;
 
   const previewEntry = ENTRIES[PREVIEW_DATE];
 
   function prev() {
-    if (month === 1) { setYear((y) => y - 1); setMonth(12); }
-    else setMonth((m) => m - 1);
+    if (month === 1) {
+      setYear((y) => y - 1);
+      setMonth(12);
+    } else setMonth((m) => m - 1);
   }
   function next() {
-    if (month === 12) { setYear((y) => y + 1); setMonth(1); }
-    else setMonth((m) => m + 1);
+    if (month === 12) {
+      setYear((y) => y + 1);
+      setMonth(1);
+    } else setMonth((m) => m + 1);
   }
 
   return (
@@ -54,7 +58,9 @@ export default function CalendarPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">カレンダー</h1>
-        <Badge variant="outline">{filledCount} / {totalDays} 日</Badge>
+        <Badge variant="outline">
+          {filledCount} / {totalDays} 日
+        </Badge>
       </div>
 
       {/* Calendar card */}
@@ -76,7 +82,10 @@ export default function CalendarPage() {
           {/* Day-of-week header */}
           <div className="grid grid-cols-7 mb-1">
             {DAYS_OF_WEEK.map((d) => (
-              <div key={d} className="text-center text-xs text-muted-foreground py-1">
+              <div
+                key={d}
+                className="text-center text-xs text-muted-foreground py-1"
+              >
                 {d}
               </div>
             ))}
@@ -136,7 +145,9 @@ export default function CalendarPage() {
               <RotateCcw className="h-3.5 w-3.5" />
             </Button>
           </div>
-          <p className="text-sm mt-2 italic">&#8220; 雨上がりの匂いがした。 &#8221;</p>
+          <p className="text-sm mt-2 italic">
+            &#8220; 雨上がりの匂いがした。 &#8221;
+          </p>
         </CardContent>
       </Card>
 
@@ -146,12 +157,17 @@ export default function CalendarPage() {
           <CardContent className="py-3 px-4">
             <div className="flex items-baseline justify-between mb-2">
               <p className="font-semibold text-sm">5月10日（土）</p>
-              <Link href={`/entry/${PREVIEW_DATE}`} className="text-xs text-muted-foreground hover:underline">
+              <Link
+                href={`/entry/${PREVIEW_DATE}`}
+                className="text-xs text-muted-foreground hover:underline"
+              >
                 {getMoodEmoji(previewEntry.mood)} 開く →
               </Link>
             </div>
             <ol className="text-xs text-muted-foreground space-y-0.5 list-decimal list-inside">
-              {previewEntry.items.map((item, i) => item && <li key={i}>{item}</li>)}
+              {previewEntry.items.map(
+                (item, i) => item && <li key={i}>{item}</li>,
+              )}
             </ol>
           </CardContent>
         </Card>

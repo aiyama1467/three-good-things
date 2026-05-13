@@ -7,7 +7,9 @@ interface MoodPickerProps {
   defaultMood?: Mood;
 }
 
-export default function MoodPicker({ defaultMood = "neutral" }: MoodPickerProps) {
+export default function MoodPicker({
+  defaultMood = "neutral",
+}: MoodPickerProps) {
   const [selected, setSelected] = useState<Mood>(defaultMood);
 
   return (

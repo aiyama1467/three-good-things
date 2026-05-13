@@ -16,7 +16,13 @@ interface Props {
   defaultMood: Mood;
 }
 
-export function TodayClient({ dateLabel, streak, memory, initialItems, defaultMood }: Props) {
+export function TodayClient({
+  dateLabel,
+  streak,
+  memory,
+  initialItems,
+  defaultMood,
+}: Props) {
   const [items, setItems] = useState<[string, string, string]>(initialItems);
   const [mood, setMood] = useState<Mood>(defaultMood);
 

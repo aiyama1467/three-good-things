@@ -36,7 +36,14 @@ export default function Navigation({ streak = 7 }: { streak?: number }) {
         }}
       >
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 8px 12px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "4px 8px 12px",
+          }}
+        >
           <div
             style={{
               width: 28,
@@ -54,7 +61,13 @@ export default function Navigation({ streak = 7 }: { streak?: number }) {
           >
             3
           </div>
-          <div style={{ fontFamily: "var(--font-caveat), cursive", fontSize: 18, fontWeight: 700 }}>
+          <div
+            style={{
+              fontFamily: "var(--font-caveat), cursive",
+              fontSize: 18,
+              fontWeight: 700,
+            }}
+          >
             3 Good Things
           </div>
         </div>
@@ -70,7 +83,9 @@ export default function Navigation({ streak = 7 }: { streak?: number }) {
                 padding: "8px 10px",
                 borderRadius: 8,
                 background: active ? "var(--accent)" : "transparent",
-                border: active ? "2px solid var(--ink)" : "2px solid transparent",
+                border: active
+                  ? "2px solid var(--ink)"
+                  : "2px solid transparent",
                 fontSize: 13,
                 display: "flex",
                 alignItems: "center",
@@ -97,11 +112,31 @@ export default function Navigation({ streak = 7 }: { streak?: number }) {
         <div style={{ flex: 1 }} />
 
         {/* User avatar */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 8px", fontSize: 12, color: "var(--ink-2)" }}>
-          <div style={{ width: 24, height: 24, borderRadius: "50%", border: "1.5px solid var(--ink)", background: "var(--paper)", flexShrink: 0 }} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "6px 8px",
+            fontSize: 12,
+            color: "var(--ink-2)",
+          }}
+        >
+          <div
+            style={{
+              width: 24,
+              height: 24,
+              borderRadius: "50%",
+              border: "1.5px solid var(--ink)",
+              background: "var(--paper)",
+              flexShrink: 0,
+            }}
+          />
           <div>
             <div>あなた</div>
-            <div style={{ fontSize: 10, color: "var(--ink-3)" }}>🔥 {streak}日連続</div>
+            <div style={{ fontSize: 10, color: "var(--ink-3)" }}>
+              🔥 {streak}日連続
+            </div>
           </div>
         </div>
       </aside>

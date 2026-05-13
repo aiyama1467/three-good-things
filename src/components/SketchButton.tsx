@@ -6,7 +6,13 @@ interface SketchButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   block?: boolean;
 }
 
-export default function SketchButton({ children, primary, block, style, ...rest }: SketchButtonProps) {
+export default function SketchButton({
+  children,
+  primary,
+  block,
+  style,
+  ...rest
+}: SketchButtonProps) {
   return (
     <button
       style={{

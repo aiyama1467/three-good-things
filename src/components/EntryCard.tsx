@@ -7,7 +7,10 @@ interface EntryCardProps {
   initialValue?: string;
 }
 
-export default function EntryCard({ index, initialValue = "" }: EntryCardProps) {
+export default function EntryCard({
+  index,
+  initialValue = "",
+}: EntryCardProps) {
   const [value, setValue] = useState(initialValue);
   const filled = value.trim().length > 0;
 

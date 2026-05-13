@@ -1,4 +1,8 @@
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Separator } from "@/components/ui/separator";
 import { STREAK } from "@/lib/mock-data";
@@ -12,9 +16,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="h-4" />
         </header>
-        <main className="flex-1 overflow-y-auto p-6">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -8,7 +8,13 @@ interface SketchBoxProps {
   style?: CSSProperties;
 }
 
-export default function SketchBox({ children, dashed, accent, className = "", style }: SketchBoxProps) {
+export default function SketchBox({
+  children,
+  dashed,
+  accent,
+  className = "",
+  style,
+}: SketchBoxProps) {
   return (
     <div
       className={className}

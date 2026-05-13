@@ -3,7 +3,12 @@ import { Flame, CalendarDays } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { generateHeatmap, STREAK, TOTAL_GOOD_THINGS, TOP_WORDS } from "@/lib/mock-data";
+import {
+  generateHeatmap,
+  STREAK,
+  TOTAL_GOOD_THINGS,
+  TOP_WORDS,
+} from "@/lib/mock-data";
 
 const heatmapData = generateHeatmap(36);
 const WEEKS = 36;
@@ -23,7 +28,11 @@ export default function ReviewPage() {
         </CardHeader>
         <CardContent>
           <div
-            style={{ display: "grid", gridTemplateColumns: `repeat(${WEEKS}, 1fr)`, gap: 2 }}
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${WEEKS}, 1fr)`,
+              gap: 2,
+            }}
           >
             {heatmapData.map((filled, i) => {
               const v = (Math.sin(i * 1.3) + 1) / 2;
@@ -47,8 +56,14 @@ export default function ReviewPage() {
             <span>少ない</span>
             <div className="flex items-center gap-1">
               <span className="inline-block w-2.5 h-2.5 rounded-[2px] bg-border" />
-              <span className="inline-block w-2.5 h-2.5 rounded-[2px]" style={{ background: "oklch(0.646 0.222 41.116)" }} />
-              <span className="inline-block w-2.5 h-2.5 rounded-[2px]" style={{ background: "oklch(0.577 0.245 27.325)" }} />
+              <span
+                className="inline-block w-2.5 h-2.5 rounded-[2px]"
+                style={{ background: "oklch(0.646 0.222 41.116)" }}
+              />
+              <span
+                className="inline-block w-2.5 h-2.5 rounded-[2px]"
+                style={{ background: "oklch(0.577 0.245 27.325)" }}
+              />
             </div>
             <span>多い</span>
           </div>
@@ -88,7 +103,9 @@ export default function ReviewPage() {
                 style={{ fontSize: `${22 - i * 2}px` }}
               >
                 {word}
-                <span className="text-xs font-normal text-muted-foreground ml-1">·{count}</span>
+                <span className="text-xs font-normal text-muted-foreground ml-1">
+                  ·{count}
+                </span>
               </span>
             ))}
           </div>
@@ -96,7 +113,10 @@ export default function ReviewPage() {
       </Card>
 
       {/* Calendar link */}
-      <Link href="/calendar" className={cn(buttonVariants({ variant: "outline" }))}>
+      <Link
+        href="/calendar"
+        className={cn(buttonVariants({ variant: "outline" }))}
+      >
         <CalendarDays className="h-4 w-4" />
         月カレンダーを開く
       </Link>
