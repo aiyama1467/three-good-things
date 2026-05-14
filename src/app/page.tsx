@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
+import { getSession } from "@/lib/dal";
 
-export default function Home() {
-  redirect("/today");
+export default async function Home() {
+  const session = await getSession();
+  redirect(session ? "/today" : "/login");
 }
