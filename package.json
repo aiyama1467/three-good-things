@@ -10,7 +10,7 @@
     "format": "biome format --write",
     "prepare": "lefthook install",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "npx tsx src/lib/db/migrate.ts",
+    "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },
