@@ -10,7 +10,7 @@
     "format": "biome format --write",
     "prepare": "lefthook install",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate": "dotenvx run -f .env.local -- drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@dotenvx/dotenvx": "^1.66.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
