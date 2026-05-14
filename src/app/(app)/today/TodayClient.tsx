@@ -68,7 +68,7 @@ export function TodayClient({
                 value={items[i]}
                 onChange={(e) => updateItem(i, e.target.value)}
                 placeholder="ここに書く…"
-                className="min-h-[60px] resize-none border-0 p-0 shadow-none focus-visible:ring-0 text-sm leading-relaxed"
+                className="min-h-[60px] resize-none rounded-none border-0 p-0 shadow-none focus-visible:ring-0 text-sm leading-relaxed"
               />
             </CardContent>
           </Card>
