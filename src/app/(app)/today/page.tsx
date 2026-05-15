@@ -1,20 +1,21 @@
-import { ENTRIES, MEMORY_ITEM, STREAK } from "@/lib/mock-data";
+import { requireSession } from "@/lib/dal";
+import { getEntryForDate } from "@/lib/db/queries";
+import { formatDate, MEMORY_ITEM, STREAK } from "@/lib/mock-data";
 import { TodayClient } from "./TodayClient";
 
-const TODAY = "2026-05-13";
-
-export default function TodayPage() {
-  const entry = ENTRIES[TODAY];
-  const initialItems: [string, string, string] = entry?.items ?? ["", "", ""];
-  const defaultMood = entry?.mood ?? "neutral";
+export default async function TodayPage() {
+  const session = await requireSession();
+  const today = new Date().toISOString().slice(0, 10);
+  const entry = await getEntryForDate(session.user.id, today);
 
   return (
     <TodayClient
-      dateLabel="5月13日（火）"
+      date={today}
+      dateLabel={formatDate(today)}
       streak={STREAK}
       memory={MEMORY_ITEM}
-      initialItems={initialItems}
-      defaultMood={defaultMood}
+      initialItems={entry?.items ?? ["", "", ""]}
+      defaultMood={entry?.mood ?? "neutral"}
     />
   );
 }
