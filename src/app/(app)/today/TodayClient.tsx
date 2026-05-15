@@ -1,14 +1,16 @@
 "use client";
 
 import { Flame } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { MOODS, type Mood } from "@/lib/mock-data";
+import { saveEntry } from "./actions";
 
 interface Props {
+  date: string;
   dateLabel: string;
   streak: number;
   memory: { date: string; text: string };
@@ -17,6 +19,7 @@ interface Props {
 }
 
 export function TodayClient({
+  date,
   dateLabel,
   streak,
   memory,
@@ -25,6 +28,13 @@ export function TodayClient({
 }: Props) {
   const [items, setItems] = useState<[string, string, string]>(initialItems);
   const [mood, setMood] = useState<Mood>(defaultMood);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSave = () => {
+    startTransition(async () => {
+      await saveEntry({ date, items, mood, tags: [] });
+    });
+  };
 
   const updateItem = (i: number, val: string) => {
     const next = [...items] as [string, string, string];
@@ -101,7 +111,9 @@ export function TodayClient({
 
       {/* Save button */}
       <div className="flex justify-end">
-        <Button>記録する</Button>
+        <Button onClick={handleSave} disabled={isPending}>
+          {isPending ? "保存中…" : "記録する"}
+        </Button>
       </div>
     </div>
   );
