@@ -51,9 +51,15 @@ export default function LoginPage() {
                 3
               </div>
             </div>
-            <CardTitle className="text-2xl">ログイン / 登録</CardTitle>
+            <CardTitle className="text-2xl">
+              {process.env.NEXT_PUBLIC_SIGNUP_ENABLED === "true"
+                ? "ログイン / 登録"
+                : "ログイン"}
+            </CardTitle>
             <CardDescription>
-              メールアドレスとパスワードで始められます。
+              {process.env.NEXT_PUBLIC_SIGNUP_ENABLED === "true"
+                ? "メールアドレスとパスワードで始められます。"
+                : "メールアドレスとパスワードでログインしてください。"}
             </CardDescription>
           </CardHeader>
           <CardContent>

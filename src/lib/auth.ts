@@ -15,6 +15,7 @@ export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
+    disableSignUp: process.env.NEXT_PUBLIC_SIGNUP_ENABLED !== "true",
   },
   plugins: [nextCookies()],
 });
