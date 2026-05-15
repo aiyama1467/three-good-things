@@ -20,24 +20,20 @@ export default function LoginPage() {
           <span className="font-semibold text-lg">Three Good Things</span>
         </div>
 
-        <div>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight">
-            今日の
-            <br />
-            いいこと、
-            <br />
-            3つ。
-          </h1>
-          <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
-            1日の終わりに、ちいさな良いことを 3つだけ書き留める。
-            ポジティブ心理学が勧める、続けやすい習慣。
-          </p>
-        </div>
-
-        <div className="flex gap-4 text-xs text-muted-foreground">
-          <span>· メール認証</span>
-          <span>· 端末間同期</span>
-          <span>· エクスポート可</span>
+        <div className="flex-1 flex items-center pb-24">
+          <div>
+            <h1 className="text-4xl font-bold leading-tight tracking-tight">
+              今日の
+              <br />
+              いいこと、
+              <br />
+              3つ。
+            </h1>
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
+              1日の終わりに、ちいさな良いことを 3つだけ書き留める。
+              ポジティブ心理学が勧める、続けやすい習慣。
+            </p>
+          </div>
         </div>
       </div>
 
