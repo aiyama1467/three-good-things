@@ -1,11 +1,16 @@
 import "server-only";
 
 import { and, eq } from "drizzle-orm";
+import { cacheLife, cacheTag } from "next/cache";
 import type { Mood } from "@/lib/mock-data";
 import { db } from ".";
 import { entry } from "./schema";
 
 export async function getEntryForDate(userId: string, date: string) {
+  "use cache";
+  cacheTag(`entry:${userId}:${date}`);
+  cacheLife("hours");
+
   const row = await db
     .select()
     .from(entry)

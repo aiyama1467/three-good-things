@@ -1,6 +1,7 @@
 "use server";
 
 import { and, eq } from "drizzle-orm";
+import { updateTag } from "next/cache";
 import { requireSession } from "@/lib/dal";
 import { db } from "@/lib/db";
 import { entry } from "@/lib/db/schema";
@@ -57,4 +58,6 @@ export async function saveEntry(data: {
       updatedAt: now,
     });
   }
+
+  updateTag(`entry:${userId}:${data.date}`);
 }
