@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
+const signupEnabled = process.env.NEXT_PUBLIC_SIGNUP_ENABLED === "true";
+
 export function LoginForm() {
   const router = useRouter();
   const params = useSearchParams();
@@ -25,6 +27,11 @@ export function LoginForm() {
 
     try {
       if (isSignUp) {
+        if (!signupEnabled) {
+          setError("新規登録は現在無効です");
+          setLoading(false);
+          return;
+        }
         const { error: err } = await authClient.signUp.email({
           name: name.trim() || email.split("@")[0],
           email,
@@ -89,19 +96,21 @@ export function LoginForm() {
         {loading ? "処理中…" : isSignUp ? "アカウントを作成" : "ログイン"}
       </Button>
 
-      <p className="text-center text-sm text-muted-foreground">
-        {isSignUp ? "アカウントをお持ちの方は" : "アカウントがない方は"}
-        <button
-          type="button"
-          className="ml-1 underline underline-offset-4 hover:text-primary"
-          onClick={() => {
-            setIsSignUp(!isSignUp);
-            setError("");
-          }}
-        >
-          {isSignUp ? "ログイン" : "新規登録"}
-        </button>
-      </p>
+      {signupEnabled && (
+        <p className="text-center text-sm text-muted-foreground">
+          {isSignUp ? "アカウントをお持ちの方は" : "アカウントがない方は"}
+          <button
+            type="button"
+            className="ml-1 underline underline-offset-4 hover:text-primary"
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setError("");
+            }}
+          >
+            {isSignUp ? "ログイン" : "新規登録"}
+          </button>
+        </p>
+      )}
     </form>
   );
 }
