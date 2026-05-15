@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm lint)",
+      "Bash(pnpm format)",
+      "Bash(pnpm build)",
+      "Bash(pnpm dev)",
+      "Bash(pnpm db:generate)",
+      "Bash(pnpm db:migrate)",
+      "Bash(pnpm db:push)",
+      "Bash(pnpm db:studio)",
+      "Bash(npx biome *)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(npx drizzle-kit *)"
+    ]
+  }
+}
