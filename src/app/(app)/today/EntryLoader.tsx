@@ -1,13 +1,14 @@
+import { requireSession } from "@/lib/dal";
 import { getEntryForDate } from "@/lib/db/queries";
 import { EntryForm } from "./EntryForm";
 
 interface Props {
-  userId: string;
   date: string;
 }
 
-export async function EntryLoader({ userId, date }: Props) {
-  const entry = await getEntryForDate(userId, date);
+export async function EntryLoader({ date }: Props) {
+  const session = await requireSession();
+  const entry = await getEntryForDate(session.user.id, date);
 
   return (
     <EntryForm
