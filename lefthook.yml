@@ -2,4 +2,4 @@ pre-commit:
   commands:
     biome-check:
       glob: "*.{js,ts,jsx,tsx,json}"
-      run: pnpm dlx biome check --no-errors-on-unmatched {staged_files}
+      run: pnpm exec biome check --no-errors-on-unmatched {staged_files}
