@@ -1,8 +1,6 @@
 "use client";
 
-import { Flame } from "lucide-react";
 import { useState, useTransition } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,21 +9,11 @@ import { saveEntry } from "./actions";
 
 interface Props {
   date: string;
-  dateLabel: string;
-  streak: number;
-  memory: { date: string; text: string };
   initialItems: [string, string, string];
   defaultMood: Mood;
 }
 
-export function TodayClient({
-  date,
-  dateLabel,
-  streak,
-  memory,
-  initialItems,
-  defaultMood,
-}: Props) {
+export function EntryForm({ date, initialItems, defaultMood }: Props) {
   const [items, setItems] = useState<[string, string, string]>(initialItems);
   const [mood, setMood] = useState<Mood>(defaultMood);
   const [isPending, startTransition] = useTransition();
@@ -43,30 +31,7 @@ export function TodayClient({
   };
 
   return (
-    <div className="max-w-xl space-y-4">
-      {/* Header */}
-      <div className="flex items-baseline justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">今日のいいこと</h1>
-          <p className="text-sm text-muted-foreground">{dateLabel}</p>
-        </div>
-        <Badge variant="secondary" className="flex items-center gap-1">
-          <Flame className="h-3.5 w-3.5 text-orange-500" />
-          {streak}日連続
-        </Badge>
-      </div>
-
-      {/* Memory card */}
-      <Card className="bg-muted/50">
-        <CardContent className="py-3 px-4">
-          <p className="text-xs text-muted-foreground mb-0.5">
-            1年前の今日 · {memory.date.replace(/-/g, "/")}
-          </p>
-          <p className="text-sm">&#8220;{memory.text}&#8221;</p>
-        </CardContent>
-      </Card>
-
-      {/* Entry cards */}
+    <>
       <div className="space-y-3">
         {([0, 1, 2] as const).map((i) => (
           <Card key={i} className={items[i] ? "ring-1 ring-primary/20" : ""}>
@@ -85,7 +50,6 @@ export function TodayClient({
         ))}
       </div>
 
-      {/* Mood picker */}
       <Card className="bg-muted/30">
         <CardContent className="py-3 px-4 flex items-center justify-between">
           <span className="text-sm text-muted-foreground">今日の気分</span>
@@ -109,12 +73,11 @@ export function TodayClient({
         </CardContent>
       </Card>
 
-      {/* Save button */}
       <div className="flex justify-end">
         <Button onClick={handleSave} disabled={isPending}>
           {isPending ? "保存中…" : "記録する"}
         </Button>
       </div>
-    </div>
+    </>
   );
 }
