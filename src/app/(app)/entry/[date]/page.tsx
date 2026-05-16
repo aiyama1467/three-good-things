@@ -1,5 +1,7 @@
 import { ChevronLeft, Pencil, Share2 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { requireSession } from "@/lib/dal";
@@ -11,28 +13,17 @@ interface Props {
   params: Promise<{ date: string }>;
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { date } = await params;
+  return { title: formatDate(date) };
+}
+
 export default async function EntryDetailPage({ params }: Props) {
   const { date } = await params;
   const session = await requireSession();
   const entry = await getEntryForDate(session.user.id, date);
 
-  if (!entry) {
-    return (
-      <div className="max-w-xl space-y-4">
-        <Link
-          href="/calendar"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "-ml-2",
-          )}
-        >
-          <ChevronLeft className="h-4 w-4" />
-          カレンダー
-        </Link>
-        <p className="text-muted-foreground">この日の記録はありません。</p>
-      </div>
-    );
-  }
+  if (!entry) notFound();
 
   const moodLabel = MOODS.find((m) => m.value === entry.mood)?.label ?? "";
 

@@ -1,4 +1,5 @@
 import { CalendarDays, Flame } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,8 @@ import {
   TOTAL_GOOD_THINGS,
 } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = { title: "ふりかえり" };
 
 const heatmapData = generateHeatmap(36);
 const WEEKS = 36;

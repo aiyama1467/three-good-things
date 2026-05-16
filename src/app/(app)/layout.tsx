@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -21,14 +22,16 @@ export default async function AppLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar
-        streak={STREAK}
-        user={{
-          name: session.user.name,
-          email: session.user.email,
-          image: session.user.image ?? null,
-        }}
-      />
+      <Suspense>
+        <AppSidebar
+          streak={STREAK}
+          user={{
+            name: session.user.name,
+            email: session.user.email,
+            image: session.user.image ?? null,
+          }}
+        />
+      </Suspense>
       <SidebarInset>
         <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />

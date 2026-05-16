@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { requireSession } from "@/lib/dal";
 import { getEntriesForMonth, getEntryForDate } from "@/lib/db/queries";
 import { CalendarShell } from "./CalendarShell";
 import { CalendarSkeleton } from "./CalendarSkeleton";
+
+export const metadata: Metadata = { title: "カレンダー" };
 
 export default async function CalendarPage({
   searchParams,
