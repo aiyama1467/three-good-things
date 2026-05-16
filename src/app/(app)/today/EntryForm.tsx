@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { MOODS, type Mood } from "@/lib/mock-data";
 import { entrySchema } from "@/lib/validations";
-import { saveEntry } from "./actions";
+import { saveEntry } from "../actions";
 
 interface Props {
   date: string;
