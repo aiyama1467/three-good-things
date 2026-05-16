@@ -5,8 +5,7 @@ import { requireSession } from "@/lib/dal";
 import { db } from "@/lib/db";
 import { entry } from "@/lib/db/schema";
 import type { Mood } from "@/lib/mock-data";
-
-const VALID_MOODS: Mood[] = ["great", "good", "neutral", "bad", "awful"];
+import { entrySchema } from "@/lib/validations";
 
 export async function saveEntry(data: {
   date: string;
@@ -18,11 +17,9 @@ export async function saveEntry(data: {
   const userId = session.user.id;
   const now = new Date();
 
-  if (!VALID_MOODS.includes(data.mood)) {
-    throw new Error("Invalid mood");
-  }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
-    throw new Error("Invalid date format");
+  const parsed = entrySchema.safeParse(data);
+  if (!parsed.success) {
+    throw new Error(parsed.error.issues[0].message);
   }
 
   const existing = await db
