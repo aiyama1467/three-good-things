@@ -15,6 +15,13 @@
       "when": 1778850855376,
       "tag": "0001_omniscient_kingpin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1778920526458,
+      "tag": "0002_many_puck",
+      "breakpoints": true
     }
   ]
 }

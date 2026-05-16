@@ -12,7 +12,6 @@ export interface Entry {
   date: string; // ISO date e.g. "2026-05-10"
   items: [string, string, string];
   mood: Mood;
-  tags: string[];
 }
 
 export const STREAK = 7;

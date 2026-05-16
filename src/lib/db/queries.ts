@@ -59,6 +59,5 @@ export async function getEntryForDate(userId: string, date: string) {
     date: row.date,
     items: [row.item1, row.item2, row.item3] as [string, string, string],
     mood: row.mood as Mood,
-    tags: JSON.parse(row.tags) as string[],
   };
 }

@@ -19,10 +19,10 @@ export function EntryForm({ date, initialItems, defaultMood }: Props) {
   const [mood, setMood] = useState<Mood>(defaultMood);
   const [isPending, startTransition] = useTransition();
   const handleSave = () => {
-    const result = entrySchema.safeParse({ date, items, mood, tags: [] });
+    const result = entrySchema.safeParse({ date, items, mood });
     if (!result.success) return;
     startTransition(async () => {
-      await saveEntry({ date, items, mood, tags: [] });
+      await saveEntry({ date, items, mood });
     });
   };
 

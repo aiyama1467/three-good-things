@@ -68,7 +68,6 @@ export const entry = sqliteTable(
     item2: text("item_2").notNull().default(""),
     item3: text("item_3").notNull().default(""),
     mood: text("mood").notNull().default("neutral"),
-    tags: text("tags").notNull().default("[]"),
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
   },
