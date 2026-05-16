@@ -2,7 +2,9 @@ import { ChevronLeft, Pencil, Share2 } from "lucide-react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ENTRIES, formatDate, getMoodEmoji, MOODS } from "@/lib/mock-data";
+import { requireSession } from "@/lib/dal";
+import { getEntryForDate } from "@/lib/db/queries";
+import { formatDate, getMoodEmoji, MOODS } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -11,7 +13,8 @@ interface Props {
 
 export default async function EntryDetailPage({ params }: Props) {
   const { date } = await params;
-  const entry = ENTRIES[date];
+  const session = await requireSession();
+  const entry = await getEntryForDate(session.user.id, date);
 
   if (!entry) {
     return (
