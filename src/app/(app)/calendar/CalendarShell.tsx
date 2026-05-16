@@ -43,7 +43,6 @@ interface CalendarShellProps {
     date: string;
     items: [string, string, string];
     mood: Mood;
-    tags: string[];
   } | null;
   onThisDayDate: string;
 }

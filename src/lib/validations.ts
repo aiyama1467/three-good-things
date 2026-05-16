@@ -16,7 +16,6 @@ export const entrySchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "日付の形式が不正です"),
   items: z.tuple([z.string(), z.string(), z.string()]),
   mood: moodSchema,
-  tags: z.array(z.string()),
 });
 
 export type FieldErrors<T> = Partial<Record<keyof T, string>>;

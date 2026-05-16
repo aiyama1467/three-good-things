@@ -11,7 +11,6 @@ export async function saveEntry(data: {
   date: string;
   items: [string, string, string];
   mood: Mood;
-  tags: string[];
 }) {
   const session = await requireSession();
   const userId = session.user.id;
@@ -36,7 +35,6 @@ export async function saveEntry(data: {
         item2: data.items[1],
         item3: data.items[2],
         mood: data.mood,
-        tags: JSON.stringify(data.tags),
         updatedAt: now,
       })
       .where(eq(entry.id, existing.id));
@@ -49,7 +47,6 @@ export async function saveEntry(data: {
       item2: data.items[1],
       item3: data.items[2],
       mood: data.mood,
-      tags: JSON.stringify(data.tags),
       createdAt: now,
       updatedAt: now,
     });
