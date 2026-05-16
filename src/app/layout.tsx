@@ -6,7 +6,7 @@ import "./globals.css";
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Three Good Things",
+  title: { default: "Three Good Things", template: "%s | Three Good Things" },
   description: "毎日3つの良いことを記録するアプリ",
 };
 
